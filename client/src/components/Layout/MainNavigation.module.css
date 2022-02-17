@@ -17,13 +17,13 @@ header {
   justify-content: space-around;
 }
 
-li a {
+.navLinks li a {
   padding: 10px;
   text-decoration: none;
   color: white;
 }
 
-li a:hover {
+.navLinks li a:hover {
   border-bottom: 1px solid;
 }
 
@@ -76,15 +76,17 @@ li a:hover {
     transform: translatex(0%);
   }
 
-  li a {
+  .navLinks li a {
     display: flex;
     padding: 10px;
     background-color: #1f1f1f;
     font-size: 18px;
   }
 
-  .navLinkActive {
+  .navLinks .navLinkActive {
+    border: none;
     background-color: white;
     color: black;
+    /* background-color: red; */
   }
 }

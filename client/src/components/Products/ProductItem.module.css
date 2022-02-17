@@ -21,3 +21,26 @@ img {
   justify-content: space-between;
   align-items: center;
 }
+
+.actions {
+  margin-top: 0.5rem;
+}
+.actions .buyBtn {
+  margin-left: 0.3rem;
+}
+
+.buyBtn {
+  background-color: #0000ff;
+  color: white;
+}
+
+.buyBtn:hover {
+  background-color: #000070;
+}
+
+@media screen and (min-width: 768px) {
+  .item {
+    width: 20rem;
+    margin: 0 auto;
+  }
+}

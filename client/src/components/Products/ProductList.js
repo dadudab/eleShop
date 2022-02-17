@@ -37,7 +37,7 @@ const ProductList = () => {
         return (
           <ProductItem
             key={index}
-            id={product.id}
+            id={product._id}
             name={product.name}
             description={product.description}
             price={product.price}
