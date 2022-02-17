@@ -10,6 +10,7 @@ const {
 } = require('../controllers/products');
 const { validateProduct } = require('../middlewares');
 
+// Routes
 router.get('/products', getProducts);
 router.post('/products/new', validateProduct, createProduct);
 router.get('/products/:id', getSingleProduct);

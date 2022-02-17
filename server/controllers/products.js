@@ -18,7 +18,7 @@ module.exports.createProduct = async (req, res) => {
     await newProduct.save();
     return res.json(newProduct);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
@@ -29,7 +29,7 @@ module.exports.getSingleProduct = async (req, res) => {
     const product = await Product.findOne({ _id: productId });
     return res.json(product);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.json({
       error: {
         status: 400,
@@ -49,7 +49,7 @@ module.exports.updateProduct = async (req, res) => {
     });
     return res.json(updatedProduct);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.json({
       error: {
         status: 400,
@@ -64,7 +64,7 @@ module.exports.deleteProduct = async (req, res) => {
     const productId = req.params.id;
     await Product.findByIdAndDelete(productId);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.json({
       error: {
         status: 500,

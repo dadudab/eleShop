@@ -7,8 +7,6 @@ const ProductItem = (props) => {
   return (
     <li className={classes.item}>
       <img
-        //   src="https://images.unsplash.com/photo-1611791484670-ce19b801d192?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-        //   src="https://images.unsplash.com/photo-1585060544812-6b45742d762f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1481&q=80"
         src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=781&q=80"
         alt={props.name}
       />
@@ -18,8 +16,10 @@ const ProductItem = (props) => {
           <span>{props.price}$</span>
         </div>
         <div className={classes.actions}>
-          <Link to={`/products/${props.id}`}>View</Link>
-          <Button className={classes.buyBtn}>Buy Now</Button>
+          <Link to={`/products/${props.id}`}>
+            <Button>View</Button>
+          </Link>
+          <Button className={classes.addBtn}>Add to cart</Button>
         </div>
       </div>
     </li>

@@ -1,0 +1,52 @@
+.container {
+  background-color: #1f1f1f;
+  width: 90%;
+  margin: 3rem auto;
+  border-radius: 5px;
+}
+
+.container img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.content {
+  padding: 0.5rem;
+}
+
+.content p,
+h3 {
+  margin-top: 0.5rem;
+}
+
+.content h3 {
+  color: blue;
+}
+
+.showLink {
+  color: blue;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.actions .addBtn {
+  background-color: #0000ff;
+  color: white;
+  margin-left: 0.3rem;
+}
+
+.actions .addBtn:hover {
+  background-color: #000070;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 50rem;
+  }
+}

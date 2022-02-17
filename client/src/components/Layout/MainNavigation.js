@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 const MainNavigation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const sidebarActionsHandler = () => {
+  const sidebarToggleHandler = () => {
     setIsSidebarOpen((prevState) => !prevState);
   };
 
@@ -60,7 +60,7 @@ const MainNavigation = () => {
           </NavLink>
         </li>
       </ul>
-      <div className={burgerClasses} onClick={sidebarActionsHandler}>
+      <div className={burgerClasses} onClick={sidebarToggleHandler}>
         <div className={classes.burgerLine}></div>
         <div className={classes.burgerLine}></div>
         <div className={classes.burgerLine}></div>
