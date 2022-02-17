@@ -1,0 +1,8 @@
+.productList {
+  width: 90%;
+  margin: 3rem auto;
+  background-color: #1f1f1f;
+  max-width: 60rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}

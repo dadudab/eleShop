@@ -1,0 +1,23 @@
+.item {
+  background-color: black;
+  margin-top: 2rem;
+  border-radius: 5px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.content {
+  padding: 0.5rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
