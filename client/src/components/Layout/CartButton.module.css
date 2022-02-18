@@ -1,0 +1,27 @@
+.cartWrapper {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all ease-in-out 100ms;
+}
+
+.cartWrapper:hover {
+  background-color: #000000;
+}
+
+.cartWrapper .icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: blue;
+}
+
+.cartWrapper .amount {
+  position: relative;
+  top: -10px;
+  font-size: 15px;
+  color: white;
+}

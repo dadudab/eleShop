@@ -13,8 +13,9 @@ header {
 
 .navLinks {
   display: flex;
-  width: 400px;
-  justify-content: space-around;
+  width: 40rem;
+  /* justify-content: space-around; */
+  justify-content: space-evenly;
 }
 
 .navLinks li a {
@@ -29,6 +30,10 @@ header {
 
 .navLinkActive {
   border-bottom: 1px solid white;
+}
+
+.linksWrapper {
+  display: flex;
 }
 
 .burger {
@@ -87,5 +92,9 @@ header {
     border: none;
     background-color: white;
     color: black;
+  }
+
+  .linksWrapper {
+    flex-direction: column;
   }
 }

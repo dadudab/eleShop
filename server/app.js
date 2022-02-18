@@ -2,6 +2,13 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
+
+// Passport config
+require('./config/passport')(passport);
+// // Passport middleware
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Json config
 app.use(express.json());
@@ -27,9 +34,11 @@ db.once('open', () => {
 
 // Routes imports
 const productRoutes = require('./routes/product');
+const userRoutes = require('./routes/user');
 
 // Routes
 app.use('/', productRoutes);
+app.use('/', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 

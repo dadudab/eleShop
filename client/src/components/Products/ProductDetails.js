@@ -78,7 +78,7 @@ const ProductDetails = () => {
         src="https://images.unsplash.com/photo-1613141411244-0e4ac259d217?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
         alt={product.name}
       />
-      <div className={classes.content}>
+      <div className={classes.details}>
         <h1>{product.name}</h1>
         {description}
         <h3>{product.price} $</h3>

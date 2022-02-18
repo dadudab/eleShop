@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import classes from './MainNavigation.module.css';
 import { NavLink } from 'react-router-dom';
+import CartButton from './CartButton';
 
 const MainNavigation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,33 +34,38 @@ const MainNavigation = () => {
     <header>
       <div className={classes.logo}>{logo}</div>
       <ul className={navLinksClasses}>
-        <li>
-          <NavLink
-            activeClassName={classes.navLinkActive}
-            to="/products"
-            onClick={closeSidebarHandler}
-          >
-            Products
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            activeClassName={classes.navLinkActive}
-            to="/about"
-            onClick={closeSidebarHandler}
-          >
-            About
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login">Login</NavLink>
-        </li>
-        <li>
-          <NavLink to="/register" style={{ color: 'blue' }}>
-            Register
-          </NavLink>
-        </li>
+        <div className={classes.linksWrapper}>
+          <li>
+            <NavLink
+              activeClassName={classes.navLinkActive}
+              to="/products"
+              onClick={closeSidebarHandler}
+            >
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              activeClassName={classes.navLinkActive}
+              to="/about"
+              onClick={closeSidebarHandler}
+            >
+              About
+            </NavLink>
+          </li>
+        </div>
+        <div className={classes.linksWrapper}>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="/register" style={{ color: 'blue' }}>
+              Register
+            </NavLink>
+          </li>
+        </div>
       </ul>
+      <CartButton />
       <div className={burgerClasses} onClick={sidebarToggleHandler}>
         <div className={classes.burgerLine}></div>
         <div className={classes.burgerLine}></div>

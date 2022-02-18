@@ -10,18 +10,19 @@
   height: auto;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  object-fit: cover;
 }
 
-.content {
+.details {
   padding: 0.5rem;
 }
 
-.content p,
-h3 {
+.details p,
+.details h3 {
   margin-top: 0.5rem;
 }
 
-.content h3 {
+.details h3 {
   color: blue;
 }
 
