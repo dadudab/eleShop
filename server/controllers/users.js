@@ -34,3 +34,8 @@ module.exports.registerUser = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+module.exports.loginUser = (req, res, next) => {
+  passport.authenticate('local')(req, res, next);
+  console.log(req.user);
+};

@@ -4,6 +4,7 @@ import Layout from './components/Layout/Layout';
 import ProductListPage from './pages/ProductListPage';
 import AboutPage from './pages/AboutPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import RegistrationPage from './pages/RegistrationPage';
 
 const App = () => {
   return (
@@ -17,6 +18,9 @@ const App = () => {
         </Route>
         <Route path="/products/:productId">
           <ProductDetailsPage />
+        </Route>
+        <Route path="/user/register">
+          <RegistrationPage />
         </Route>
         <Route path="*">
           <Redirect to="/products" />

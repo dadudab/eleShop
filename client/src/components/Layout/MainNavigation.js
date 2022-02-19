@@ -59,7 +59,11 @@ const MainNavigation = () => {
             <NavLink to="/login">Login</NavLink>
           </li>
           <li>
-            <NavLink to="/register" style={{ color: 'blue' }}>
+            <NavLink
+              to="/user/register"
+              style={{ color: 'blue' }}
+              onClick={closeSidebarHandler}
+            >
               Register
             </NavLink>
           </li>

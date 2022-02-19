@@ -3,12 +3,31 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
+const session = require('express-session');
 
 // Passport config
 require('./config/passport')(passport);
-// // Passport middleware
-// app.use(passport.initialize());
-// app.use(passport.session());
+
+// Express session
+app.use(
+  session({
+    secret: 'process.env.SESSION_SECRET',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Global vars
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  console.log(req.user);
+  console.log();
+  return next();
+});
 
 // Json config
 app.use(express.json());

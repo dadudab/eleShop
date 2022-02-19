@@ -10,3 +10,7 @@ module.exports.validateProduct = (req, res, next) => {
     next();
   }
 };
+
+module.exports.giveUser = (req, res, next) => {
+  return res.json(req.user);
+};

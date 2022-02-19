@@ -14,7 +14,6 @@ header {
 .navLinks {
   display: flex;
   width: 40rem;
-  /* justify-content: space-around; */
   justify-content: space-evenly;
 }
 
