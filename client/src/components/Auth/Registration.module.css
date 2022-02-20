@@ -1,0 +1,11 @@
+.registration {
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 20rem;
+  background-color: #1f1f1f;
+  border-radius: 5px;
+}
+
+.registration > h2 {
+  padding: 1rem;
+}

@@ -79,7 +79,7 @@ const ProductDetails = () => {
         alt={product.name}
       />
       <div className={classes.details}>
-        <h1>{product.name}</h1>
+        <h2>{product.name}</h2>
         {description}
         <h3>{product.price} $</h3>
         <div className={classes.actions}>

@@ -1,9 +1,11 @@
 import classes from './Registration.module.css';
+import RegistrationForm from './RegistrationForm';
 
 const Registration = () => {
   return (
     <section className={classes.registration}>
-      <h2>Register</h2>
+      <h2>Register here</h2>
+      <RegistrationForm />
     </section>
   );
 };

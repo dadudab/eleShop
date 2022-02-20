@@ -56,12 +56,19 @@ const MainNavigation = () => {
         </div>
         <div className={classes.linksWrapper}>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink
+              activeClassName={classes.navLinkActive}
+              to="/login"
+              onClick={closeSidebarHandler}
+            >
+              Login
+            </NavLink>
           </li>
           <li>
             <NavLink
-              to="/user/register"
               style={{ color: 'blue' }}
+              activeClassName={classes.blueNavLinkActive}
+              to="/user/register"
               onClick={closeSidebarHandler}
             >
               Register
