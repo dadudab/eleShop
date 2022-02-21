@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import classes from './ProductList.module.css';
 import ProductItem from './ProductItem';
-import Message from '../UI/Message';
+import ErrorMessage from '../UI/ErrorMessage';
 import Loading from '../UI/Loading';
 
 const ProductList = () => {
@@ -38,7 +38,7 @@ const ProductList = () => {
   }, []);
 
   if (error) {
-    return <Message>{error}</Message>;
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   if (isLoading) {

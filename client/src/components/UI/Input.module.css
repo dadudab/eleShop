@@ -1,6 +1,5 @@
 .inputWrapper {
-  padding: 0 1rem;
-  padding-bottom: 0.6rem;
+  margin-top: 0.5rem;
 }
 
 .inputWrapper > label {
@@ -14,9 +13,8 @@
   padding: 0.3rem;
   width: 95%;
   background-color: transparent;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #ffffff79;
   color: white;
-  transition: all ease-in-out 150ms;
 }
 
 .inputWrapper > input:focus {
@@ -34,4 +32,13 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px #1f1f1f inset;
+}
+
+.inputWrapper .invalidInput {
+  border-bottom: 1px solid red;
+}
+
+.inputWrapper small {
+  color: red;
+  font-size: 12px;
 }

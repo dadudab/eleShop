@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import classes from './ProductDetails.module.css';
-import Message from '../UI/Message';
+import ErrorMessage from '../UI/ErrorMessage';
 import Loading from '../UI/Loading';
 import Button from '../UI/Button';
 
@@ -51,7 +51,7 @@ const ProductDetails = () => {
   };
 
   if (error) {
-    return <Message>{error}</Message>;
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   if (isLoading) {

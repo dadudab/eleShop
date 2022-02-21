@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
     required: [true, 'Addres must not be empty'],
   },
   postalCode: {
-    type: Number,
+    type: String,
     required: [true, 'Postal code must not be empty'],
   },
   email: {

@@ -1,6 +1,6 @@
-import classes from './Message.module.css';
+import classes from './ErrorMessage.module.css';
 
-const Message = (props) => {
+const ErrorMessage = (props) => {
   return (
     <h2 className={`${classes.message} ${props.className}`}>
       {props.children}
@@ -8,4 +8,4 @@ const Message = (props) => {
   );
 };
 
-export default Message;
+export default ErrorMessage;

@@ -9,10 +9,13 @@ const Input = (props) => {
         onChange={props.onChange}
         value={props.value}
         onBlur={props.onBlur}
-        className={`${classes.input} ${props.className}`}
+        className={`${classes.input} ${
+          props.isInvalid ? classes.invalidInput : ''
+        } ${props.className}`}
         id={props.name}
         placeholder={props.placeholder}
       />
+      {props.isInvalid && <small>{props.errorMessage}</small>}
     </div>
   );
 };
