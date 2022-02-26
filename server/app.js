@@ -4,39 +4,60 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 // Passport config
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
 
-// Express session
+app.use(cookieParser());
+
+// CORS config
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'PUT', 'POST', 'DELETE'],
+//   })
+// );
 app.use(
-  session({
-    secret: 'process.env.SESSION_SECRET',
-    resave: false,
-    saveUninitialized: true,
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
   })
 );
 
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// Express session
+// app.use(
+//   session({
+//     secret: 'process.env.SESSION_SECRET',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       maxAge: 1000 * 60 * 60 * 24,
+//       secure: false,
+//     },
+//   })
+// );
 
 // Global vars
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  console.log(req.user);
-  console.log();
-  return next();
-});
+// app.use((req, res, next) => {
+//   res.locals.currentUser = req.user;
+
+// res.append('Access-Control-Allow-Origin', 'http://localhost:3000');
+// res.append('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
+// res.append('Access-Control-Allow-Methods', ['GET', 'POST', 'OPTIONS']);
+// res.append('Access-Control-Allow-Credentials', true);
+
+//   console.log(req.session);
+//   console.log(req.user);
+//   return next();
+// });
 
 // Json config
 app.use(express.json());
 
 // dotenv config
 require('dotenv').config();
-
-// CORS config
-app.use(cors());
 
 // Database config
 mongoose.connect(process.env.MONGODB_URI, {
@@ -50,6 +71,10 @@ db.on('error', console.error.bind(console.error, 'connection error:'));
 db.once('open', () => {
   console.log('Database connected');
 });
+
+// Passport middleware
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Routes imports
 const productRoutes = require('./routes/product');

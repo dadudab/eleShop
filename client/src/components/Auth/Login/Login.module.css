@@ -1,4 +1,4 @@
-.registration {
+.login {
   margin: 3rem auto;
   width: 90%;
   max-width: 20rem;
@@ -6,10 +6,10 @@
   border-radius: 5px;
 }
 
-.registrationWrapper {
+.loginWrapper {
   padding: 1rem;
 }
 
-.registerError {
+.loginError {
   text-align: center;
 }

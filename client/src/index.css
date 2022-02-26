@@ -10,7 +10,13 @@ body,
   margin: 0;
   font-family: 'Sora', sans-serif;
   color: white;
-  background-color: black;
+
+  /* background settings */
+  /* background-image: url('./assets/test.jfif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; */
+  background-color: #000000;
 
   min-height: 100vh;
   display: flex;

@@ -1,5 +1,7 @@
 .inputWrapper {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .inputWrapper > label {
@@ -11,7 +13,6 @@
   outline: none;
   border: none;
   padding: 0.3rem;
-  width: 95%;
   background-color: transparent;
   border-bottom: 1px solid #ffffff79;
   color: white;

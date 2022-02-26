@@ -1,9 +1,23 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import classes from './ProductItem.module.css';
 import Button from '../UI/Button';
+import CartContext from '../../store/cart-context';
 
 const ProductItem = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const addToCartHandler = () => {
+    const item = {
+      id: props.id,
+      name: props.name,
+      price: props.price,
+      amount: 1,
+    };
+    cartCtx.addToCart(item);
+  };
+
   return (
     <li className={classes.item}>
       <img
@@ -19,7 +33,9 @@ const ProductItem = (props) => {
           <Link to={`/products/${props.id}`}>
             <Button>View</Button>
           </Link>
-          <Button className={classes.addBtn}>Add to cart</Button>
+          <Button className={classes.addBtn} onClick={addToCartHandler}>
+            Add to cart
+          </Button>
         </div>
       </div>
     </li>

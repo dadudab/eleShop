@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
@@ -5,10 +6,25 @@ import ProductListPage from './pages/ProductListPage';
 import AboutPage from './pages/AboutPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import RegistrationPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const openCartHandler = () => {
+    setIsCartOpen(true);
+    console.log('open cart');
+  };
+
+  const closeCartHandler = () => {
+    setIsCartOpen(false);
+    console.log('close cart');
+  };
+
   return (
-    <Layout>
+    <Layout onCartOpen={openCartHandler}>
+      {isCartOpen && <Cart onCloseCart={closeCartHandler} />}
       <Switch>
         <Route path="/products" exact>
           <ProductListPage />
@@ -18,6 +34,9 @@ const App = () => {
         </Route>
         <Route path="/products/:productId">
           <ProductDetailsPage />
+        </Route>
+        <Route path="/user/login">
+          <LoginPage />
         </Route>
         <Route path="/user/register">
           <RegistrationPage />

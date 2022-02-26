@@ -1,0 +1,14 @@
+.actions {
+  margin-top: 1rem;
+}
+
+.actions button {
+  width: 100%;
+  background-color: #0000ff;
+  color: white;
+  margin-bottom: 0.7rem;
+}
+
+.actions button:hover {
+  background-color: #000070;
+}
