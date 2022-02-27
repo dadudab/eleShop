@@ -1,3 +1,20 @@
 .cartList {
   margin-top: 1rem;
 }
+
+.cartContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.cartActions .orderBtn {
+  background-color: #0000ff;
+  color: white;
+  margin-left: 0.3rem;
+}
+
+.cartActions .orderBtn:hover {
+  background-color: #000070;
+}

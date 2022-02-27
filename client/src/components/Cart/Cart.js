@@ -4,6 +4,7 @@ import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
 import CartContext from '../../store/cart-context';
 import CartItem from './CartItem';
+import Button from '../UI/Button';
 
 const Cart = (props) => {
   const [cartItems, setCartItems] = useState([]);
@@ -30,6 +31,13 @@ const Cart = (props) => {
           );
         })}
       </ul>
+      <div className={classes.cartContainer}>
+        <div className={classes.cartActions}>
+          <Button onClick={props.onCloseCart}>Close</Button>
+          <Button className={classes.orderBtn}>Order</Button>
+        </div>
+        <p>Total: {cartCtx.totalAmount}$</p>
+      </div>
     </Modal>
   );
 };
