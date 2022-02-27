@@ -4,18 +4,24 @@ import { Link } from 'react-router-dom';
 import classes from './ProductItem.module.css';
 import Button from '../UI/Button';
 import CartContext from '../../store/cart-context';
+import AuthContext from '../../store/auth-context';
 
 const ProductItem = (props) => {
   const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
 
   const addToCartHandler = () => {
-    const item = {
-      id: props.id,
-      name: props.name,
-      price: props.price,
-      amount: 1,
-    };
-    cartCtx.addToCart(item);
+    if (authCtx.isLogged) {
+      console.log('user is loged!!!');
+    } else {
+      const item = {
+        id: props.id,
+        name: props.name,
+        price: props.price,
+        amount: 1,
+      };
+      cartCtx.addToCart(item);
+    }
   };
 
   return (

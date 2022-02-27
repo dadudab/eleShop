@@ -3,8 +3,12 @@ import React, { useReducer } from 'react';
 import CartContext from './cart-context';
 
 const initialCartState = {
-  items: [],
-  totalAmount: 0,
+  items: localStorage.getItem('cart')
+    ? JSON.parse(localStorage.getItem('cart'))
+    : [],
+  totalAmount: localStorage.getItem('totalAmount')
+    ? +JSON.parse(localStorage.getItem('totalAmount'))
+    : 0,
 };
 
 const cartReducer = (state, action) => {
@@ -22,6 +26,8 @@ const cartReducer = (state, action) => {
       const updatedItems = [...state.items];
       updatedItems[existingCartItemIndex] = updatedItem;
       const updatedTotalAmount = +state.totalAmount + action.item.price;
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
+      localStorage.setItem('totalAmount', JSON.stringify(updatedTotalAmount));
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount.toFixed(2),
@@ -29,11 +35,13 @@ const cartReducer = (state, action) => {
     }
     if (!existingCartItem) {
       const updatedItems = [...state.items, action.item];
-      const updatedTotalPrice = +state.totalAmount + action.item.price;
+      const updatedTotalAmount = +state.totalAmount + action.item.price;
       console.log(existingCartItem);
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
+      localStorage.setItem('totalAmount', JSON.stringify(updatedTotalAmount));
       return {
         items: updatedItems,
-        totalAmount: updatedTotalPrice.toFixed(2),
+        totalAmount: updatedTotalAmount.toFixed(2),
       };
     }
   }
@@ -54,16 +62,24 @@ const cartReducer = (state, action) => {
       updatedItems[existingCartItemIndex] = updatedItem;
       // update total price
       const updatedTotalAmount = +state.totalAmount - existingCartItem.price;
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
+      localStorage.setItem('totalAmount', JSON.stringify(updatedTotalAmount));
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount.toFixed(2),
       };
     }
-    if (existingCartItem === 1) {
+    if (existingCartItem.amount === 1) {
       const updatedItems = state.items.filter(
         (item) => item.id !== action.itemId
       );
       const updatedTotalAmount = +state.totalAmount - existingCartItem.price;
+
+      localStorage.setItem('cart', JSON.stringify(updatedItems));
+      localStorage.setItem(
+        'totalAmount',
+        JSON.stringify(updatedTotalAmount.toFixed(2))
+      );
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount.toFixed(2),
