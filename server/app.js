@@ -26,33 +26,6 @@ app.use(
   })
 );
 
-// Express session
-// app.use(
-//   session({
-//     secret: 'process.env.SESSION_SECRET',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       maxAge: 1000 * 60 * 60 * 24,
-//       secure: false,
-//     },
-//   })
-// );
-
-// Global vars
-// app.use((req, res, next) => {
-//   res.locals.currentUser = req.user;
-
-// res.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-// res.append('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
-// res.append('Access-Control-Allow-Methods', ['GET', 'POST', 'OPTIONS']);
-// res.append('Access-Control-Allow-Credentials', true);
-
-//   console.log(req.session);
-//   console.log(req.user);
-//   return next();
-// });
-
 // Json config
 app.use(express.json());
 
@@ -79,10 +52,12 @@ db.once('open', () => {
 // Routes imports
 const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
+const cartRoutes = require('./routes/cart');
 
 // Routes
 app.use('/', productRoutes);
 app.use('/', userRoutes);
+app.use('/', cartRoutes);
 
 const PORT = process.env.PORT || 3000;
 
