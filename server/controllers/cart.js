@@ -1,7 +1,5 @@
-const mongoose = require('mongoose');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
-const User = require('../models/user');
 
 module.exports.getUserCart = async (req, res) => {
   const userId = req.user._id;
@@ -13,13 +11,6 @@ module.exports.getUserCart = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-  //   try {
-  //     const cart = await Cart.find({});
-  //     return res.json(cart);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
 };
 
 module.exports.addProductToCart = async (req, res) => {
@@ -37,23 +28,91 @@ module.exports.addProductToCart = async (req, res) => {
     if (!cart) {
       const newCart = new Cart({
         user: userId,
-        products: [{ productId, quantity: 1 }],
+        products: [{ productId: productId, quantity: 1 }],
         totalAmount: addedProduct.price,
       });
       await newCart.save();
       return res.json(newCart);
     }
 
-    const updatedCart = await Cart.updateOne(
-      { user: userId },
-      {
-        $inc: { products: { quantity: 5 } },
-      }
+    const existingCartItemIndex = cart.products.findIndex(
+      (item) => item.productId === productId
     );
+    const existingCartItem = cart.products[existingCartItemIndex];
 
-    return res.json(updatedCart);
+    if (existingCartItem) {
+      const updatedItem = {
+        productId: existingCartItem.productId,
+        quantity: existingCartItem.quantity + 1,
+      };
+      const updatedTotalAmount = cart.totalAmount + addedProduct.price;
+
+      cart.products[existingCartItemIndex] = updatedItem;
+      cart.totalAmount = updatedTotalAmount;
+
+      await cart.save();
+      return res.json(cart);
+    } else {
+      cart.products.push({
+        productId: productId,
+        quantity: 1,
+      });
+      const updatedTotalAmount = cart.totalAmount + addedProduct.price;
+      cart.totalAmount = updatedTotalAmount;
+
+      await cart.save();
+      return res.json(cart);
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: 'Someting went wrong' });
+  }
+};
+
+module.exports.removeProductFromCart = async (req, res) => {
+  const { productId } = req.params;
+  const userId = req.user._id;
+
+  try {
+    const cart = await Cart.findOne({ user: userId });
+    const selectedProduct = await Product.findOne({ _id: productId });
+
+    if (!selectedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    const cartProductIndex = cart.products.findIndex(
+      (item) => item.productId === productId
+    );
+    const cartProduct = cart.products[cartProductIndex];
+    console.log(cartProduct.quantity);
+
+    if (cartProduct.quantity > 1) {
+      const updatedProduct = {
+        productId: cartProduct.productId,
+        quantity: cartProduct.quantity - 1,
+      };
+      const updatedTotalAmount = cart.totalAmount - selectedProduct.price;
+
+      cart.products[cartProductIndex] = updatedProduct;
+      cart.totalAmount = updatedTotalAmount;
+
+      await cart.save();
+      return res.json(cart);
+    } else {
+      const updatedProducts = cart.products.filter(
+        (item) => item.productId !== productId
+      );
+      const updatedTotalAmount = cart.totalAmount - selectedProduct.price;
+
+      cart.products = updatedProducts;
+      cart.totalAmount = updatedTotalAmount;
+
+      await cart.save();
+      return res.json(cart);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Something went wrong' });
   }
 };
