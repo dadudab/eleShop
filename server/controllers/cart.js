@@ -5,7 +5,10 @@ module.exports.getUserCart = async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId }).populate({
+      path: 'products',
+      populate: { path: 'product' },
+    });
 
     if (!cart) {
       return res.status(404).json({ message: 'Your cart is empty' });
@@ -23,7 +26,10 @@ module.exports.addProductToCart = async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId }).populate({
+      path: 'products',
+      populate: { path: 'product' },
+    });
     const addedProduct = await Product.findOne({ _id: productId });
 
     if (!addedProduct) {
@@ -33,7 +39,7 @@ module.exports.addProductToCart = async (req, res) => {
     if (!cart) {
       const newCart = new Cart({
         user: userId,
-        products: [{ productId: productId, quantity: 1 }],
+        products: [{ productId: productId, product: productId, quantity: 1 }],
         totalAmount: addedProduct.price,
       });
       await newCart.save();
@@ -48,6 +54,7 @@ module.exports.addProductToCart = async (req, res) => {
     if (existingCartItem) {
       const updatedItem = {
         productId: existingCartItem.productId,
+        product: existingCartItem.product,
         quantity: existingCartItem.quantity + 1,
       };
       const updatedTotalAmount = cart.totalAmount + addedProduct.price;
@@ -60,6 +67,7 @@ module.exports.addProductToCart = async (req, res) => {
     } else {
       cart.products.push({
         productId: productId,
+        product: productId,
         quantity: 1,
       });
       const updatedTotalAmount = cart.totalAmount + addedProduct.price;
@@ -79,7 +87,10 @@ module.exports.removeProductFromCart = async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId }).populate({
+      path: 'products',
+      populate: { path: 'product' },
+    });
     const selectedProduct = await Product.findOne({ _id: productId });
 
     if (!selectedProduct) {
@@ -95,6 +106,7 @@ module.exports.removeProductFromCart = async (req, res) => {
     if (cartProduct.quantity > 1) {
       const updatedProduct = {
         productId: cartProduct.productId,
+        product: cartProduct.product,
         quantity: cartProduct.quantity - 1,
       };
       const updatedTotalAmount = cart.totalAmount - selectedProduct.price;

@@ -16,35 +16,37 @@ const Cart = (props) => {
 
   useEffect(() => {
     setCartItems(cartCtx.items);
-    if(authCtx.isLogged) {
+    if (authCtx.isLogged) {
       setCartItems(userCartCtx.userCart.products);
     }
-
   }, [cartCtx.items]);
 
-  if(authCtx.isLogged) {
-
+  if (authCtx.isLogged) {
     return (
-    <Modal onClose={props.onCloseCart}>
-      <h2>Your Cart</h2>
-      <ul className={classes.cartList}>
-        {cartItems.map((item) => {
-          return (
-            <div>
-              <h1>{item.quantity}</h1>
-            </div>
-          );
-        })}
-      </ul>
-      <div className={classes.cartContainer}>
-        <div className={classes.cartActions}>
-          <Button onClick={props.onCloseCart}>Close</Button>
-          <Button className={classes.orderBtn}>Order</Button>
+      <Modal onClose={props.onCloseCart}>
+        <h2>Your Cart</h2>
+        <ul className={classes.cartList}>
+          {cartItems.map((item) => {
+            return (
+              <CartItem
+                key={item.product._id}
+                id={item.product._id}
+                name={item.product.name}
+                price={item.product.price}
+                amount={item.quantity}
+              />
+            );
+          })}
+        </ul>
+        <div className={classes.cartContainer}>
+          <div className={classes.cartActions}>
+            <Button onClick={props.onCloseCart}>Close</Button>
+            <Button className={classes.orderBtn}>Order</Button>
+          </div>
+          <p>Total: {userCartCtx.userCart.totalAmount}$</p>
         </div>
-        <p>Total: {userCartCtx.totalAmount}$</p>
-      </div>
-    </Modal>
-  );
+      </Modal>
+    );
   }
 
   return (
