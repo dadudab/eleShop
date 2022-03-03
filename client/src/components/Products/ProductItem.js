@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import classes from './ProductItem.module.css';
@@ -9,10 +9,31 @@ import AuthContext from '../../store/auth-context';
 const ProductItem = (props) => {
   const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
+  const [cart, setCart] = useState({});
+
+  async function addToCart() {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/cart/add/${props.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authCtx.token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const addToCartHandler = () => {
     if (authCtx.isLogged) {
-      console.log('user is loged!!!');
+      addToCart();
     } else {
       const item = {
         id: props.id,

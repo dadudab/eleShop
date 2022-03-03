@@ -6,10 +6,15 @@ module.exports.getUserCart = async (req, res) => {
 
   try {
     const cart = await Cart.findOne({ user: userId });
-    console.log(cart);
+
+    if (!cart) {
+      return res.status(404).json({ message: 'Your cart is empty' });
+    }
+
     return res.json(cart);
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: 'Something went wrong' });
   }
 };
 

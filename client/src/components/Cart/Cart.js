@@ -13,6 +13,7 @@ const Cart = (props) => {
   useEffect(() => {
     setCartItems(cartCtx.items);
     console.log('set cart items');
+    // props.passTest();
   }, [cartCtx.items]);
 
   return (

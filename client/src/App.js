@@ -9,8 +9,9 @@ import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import Cart from './components/Cart/Cart';
 
-const App = () => {
+const App = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  // const [testCart, setTestCart] = useState({});
 
   const openCartHandler = () => {
     setIsCartOpen(true);
@@ -27,7 +28,7 @@ const App = () => {
       {isCartOpen && <Cart onCloseCart={closeCartHandler} />}
       <Switch>
         <Route path="/products" exact>
-          <ProductListPage />
+          <ProductListPage/>
         </Route>
         <Route path="/about">
           <AboutPage />

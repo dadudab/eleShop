@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 import ErrorMessage from '../UI/ErrorMessage';
 import Loading from '../UI/Loading';
 
-const ProductList = () => {
+const ProductList = (props) => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
