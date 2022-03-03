@@ -5,11 +5,12 @@ import classes from './ProductItem.module.css';
 import Button from '../UI/Button';
 import CartContext from '../../store/cart-context';
 import AuthContext from '../../store/auth-context';
+import UserCartContext from '../../store/user-cart-context';
 
 const ProductItem = (props) => {
   const cartCtx = useContext(CartContext);
   const authCtx = useContext(AuthContext);
-  const [cart, setCart] = useState({});
+  const userCartCtx = useContext(UserCartContext);
 
   async function addToCart() {
     try {
@@ -26,6 +27,7 @@ const ProductItem = (props) => {
 
       const data = await response.json();
       console.log(data);
+      userCartCtx.addToUserCart(data);
     } catch (error) {
       console.log(error);
     }

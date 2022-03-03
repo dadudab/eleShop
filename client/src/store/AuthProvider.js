@@ -1,7 +1,8 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
 import jwtDecode from 'jwt-decode';
 
 import AuthContext from './auth-context';
+import CartContext from './cart-context';
 
 const initialAuthState = {
   token: '',
@@ -45,9 +46,11 @@ const authReducer = (state, action) => {
 
 const AuthProvider = (props) => {
   const [authState, dispatchAuth] = useReducer(authReducer, initialAuthState);
+  const cartCtx = useContext(CartContext);
 
   const loginUserHandler = (token) => {
     dispatchAuth({ type: 'LOGIN_USER', token });
+    cartCtx.getUserCart();
   };
 
   const logoutUserHandler = () => {

@@ -1,5 +1,6 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState, useContext, useEffect } from 'react';
 
+import AuthContext from './auth-context';
 import CartContext from './cart-context';
 
 const initialCartState = {
@@ -104,15 +105,14 @@ const CartProvider = (props) => {
     dispatchCart({ type: 'REMOVE_CART_ITEM', itemId: itemId });
   };
 
+ 
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addToCart: addCartItemHandler,
     removeFromCart: removeCartItemHandler,
   };
-
-  console.log(cartState);
-  console.log(+cartState.totalAmount);
 
   return (
     <CartContext.Provider value={cartContext}>
