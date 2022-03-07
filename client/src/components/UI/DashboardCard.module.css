@@ -1,0 +1,13 @@
+.dashboardCard {
+  background-color: #1f1f1f;
+  /* padding: 1rem; */
+  border-radius: 5px;
+  box-shadow: 0 0 1em blue;
+  /* max-width: 15rem; */
+  width: 100%;
+  /* margin: 0 auto; */
+}
+
+.wrapper {
+  padding: 1rem;
+}

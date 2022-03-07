@@ -1,0 +1,32 @@
+.dashboardSection {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.wrapper {
+  padding: 1rem;
+}
+
+.stats {
+  margin-top: 1rem;
+  display: grid;
+  gap: 20px;
+}
+
+.products {
+  margin: 1rem auto;
+  background-color: #1f1f1f;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 700px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

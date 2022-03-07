@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
@@ -9,9 +9,11 @@ import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import Cart from './components/Cart/Cart';
 import DashboardPage from './pages/DashboardPage';
+import AuthContext from './store/auth-context';
 
-const App = (props) => {
+const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const authCtx = useContext(AuthContext);
 
   const openCartHandler = () => {
     setIsCartOpen(true);
@@ -22,6 +24,8 @@ const App = (props) => {
     setIsCartOpen(false);
     console.log('close cart');
   };
+
+  const isUserAdmin = authCtx.isLogged && authCtx.isAdmin;
 
   return (
     <Layout onCartOpen={openCartHandler}>
@@ -42,9 +46,11 @@ const App = (props) => {
         <Route path="/user/register">
           <RegistrationPage />
         </Route>
-        <Route path="/dashboard">
-          <DashboardPage />
-        </Route>
+        {isUserAdmin && (
+          <Route path="/dashboard">
+            <DashboardPage />
+          </Route>
+        )}
         <Route path="*">
           <Redirect to="/products" />
         </Route>
