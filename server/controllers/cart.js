@@ -1,5 +1,5 @@
-const Cart = require('../models/Cart');
-const Product = require('../models/Product');
+const Cart = require('../models/cart');
+const Product = require('../models/product');
 
 module.exports.getUserCart = async (req, res) => {
   const userId = req.user._id;
@@ -30,6 +30,7 @@ module.exports.addProductToCart = async (req, res) => {
       path: 'products',
       populate: { path: 'product' },
     });
+
     const addedProduct = await Product.findOne({ _id: productId });
 
     if (!addedProduct) {
@@ -74,7 +75,12 @@ module.exports.addProductToCart = async (req, res) => {
       cart.totalAmount = updatedTotalAmount;
 
       await cart.save();
-      return res.json(cart);
+
+      // for populate added first cart item
+      const updatedAndSavedCart = await Cart.findOne({
+        user: req.user._id,
+      }).populate({ path: 'products', populate: { path: 'product' } });
+      return res.json(updatedAndSavedCart);
     }
   } catch (error) {
     console.log(error);

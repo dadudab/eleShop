@@ -1,8 +1,9 @@
 import React from 'react';
 
 const UserCartContext = React.createContext({
-   userCart: {},
-   addToUserCart: (cart) => {}
+  userCart: {},
+  totalProducts: 0,
+  updateUserCart: (cart) => {},
 });
 
 export default UserCartContext;

@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Cart = require('../models/cart');
+// const Product = require('../models/product');
 
 module.exports.registerUser = async (req, res) => {
   const { firstName, lastName, city, address, postalCode, email, password } =
@@ -28,6 +30,13 @@ module.exports.registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
+
+    const newCart = new Cart({
+      user: createdUser._id,
+      products: [],
+      totalAmount: 0,
+    });
+    await newCart.save();
 
     const token = jwt.sign(
       {
@@ -58,7 +67,7 @@ module.exports.loginUser = async (req, res) => {
       password,
       existingUser.password
     );
-    console.log(isPasswordCorrect);
+
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: 'Email or password incorrect' });
     }

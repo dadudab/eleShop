@@ -8,10 +8,10 @@ import ProductDetailsPage from './pages/ProductDetailsPage';
 import RegistrationPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import Cart from './components/Cart/Cart';
+import DashboardPage from './pages/DashboardPage';
 
 const App = (props) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  // const [testCart, setTestCart] = useState({});
 
   const openCartHandler = () => {
     setIsCartOpen(true);
@@ -28,7 +28,7 @@ const App = (props) => {
       {isCartOpen && <Cart onCloseCart={closeCartHandler} />}
       <Switch>
         <Route path="/products" exact>
-          <ProductListPage/>
+          <ProductListPage />
         </Route>
         <Route path="/about">
           <AboutPage />
@@ -41,6 +41,9 @@ const App = (props) => {
         </Route>
         <Route path="/user/register">
           <RegistrationPage />
+        </Route>
+        <Route path="/dashboard">
+          <DashboardPage />
         </Route>
         <Route path="*">
           <Redirect to="/products" />

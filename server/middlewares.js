@@ -39,3 +39,21 @@ module.exports.isUserAuth = async (req, res, next) => {
     return res.status(401).json({ message: 'User not auth' });
   }
 };
+
+module.exports.isUserAdmin = async (req, res, next) => {
+  try {
+    if (req.headers.authorization) {
+      const token = req.headers.authorization.split(' ')[1];
+      const decodedToken = jwt.verify(token, 'test');
+
+      if (decodedToken.isAdmin) {
+        next();
+      } else {
+        return res.status(405).json({ message: 'You are not allowed' });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Something went wrong' });
+  }
+};

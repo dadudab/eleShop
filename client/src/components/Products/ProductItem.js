@@ -27,7 +27,7 @@ const ProductItem = (props) => {
 
       const data = await response.json();
       console.log(data);
-      userCartCtx.addToUserCart(data);
+      userCartCtx.updateUserCart(data);
     } catch (error) {
       console.log(error);
     }
