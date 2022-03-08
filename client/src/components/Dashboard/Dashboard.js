@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import OrdersInfo from './OrdersInfo';
 import AmountInfo from './AmountInfo';
 import classes from './Dashboard.module.css';
@@ -8,6 +10,13 @@ import DashboardProducts from './DashboardProducts/DashboardProducts';
 // const DUMMY
 
 const Dashboard = () => {
+  const [isProductListOpen, setIsProductListOpen] = useState(false);
+
+  const toggleProductsHandler = () => {
+    setIsProductListOpen((prevState) => !prevState);
+    console.log(isProductListOpen);
+  };
+
   return (
     <section className={classes.dashboardSection}>
       <h1>Dashboard</h1>
@@ -19,7 +28,15 @@ const Dashboard = () => {
       </article>
       <article className={classes.products}>
         <div className={classes.wrapper}>
-          <DashboardProducts />
+          <h2 onClick={toggleProductsHandler}>
+            Products
+            <div
+              className={
+                isProductListOpen ? classes.arrowDown : classes.arrowUp
+              }
+            ></div>
+          </h2>
+          {isProductListOpen && <DashboardProducts />}
         </div>
       </article>
     </section>
