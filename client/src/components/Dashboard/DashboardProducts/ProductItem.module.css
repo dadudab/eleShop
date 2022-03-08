@@ -1,0 +1,58 @@
+.item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid blue;
+}
+
+.item:first-of-type {
+  padding-top: 0;
+}
+
+.item:last-of-type {
+  border-bottom: none;
+}
+
+.title {
+  color: #ffffff83;
+}
+
+.actions {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions button {
+  width: 30%;
+}
+
+.updateBtn {
+  background-color: blue;
+  color: white;
+}
+
+.updateBtn:hover {
+  background-color: #000070;
+}
+
+.deleteBtn {
+  background-color: red;
+  color: white;
+}
+
+.deleteBtn:hover {
+  background-color: #ff00006e;
+}
+
+@media screen and (min-width: 768px) {
+  .actions button {
+    width: auto;
+  }
+
+  .actions {
+    display: block;
+  }
+
+  .actions button:nth-of-type(2) {
+    margin: 0 0.5rem;
+  }
+}
