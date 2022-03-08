@@ -1,4 +1,4 @@
-import DashboardCard from '../UI/DashboardCard';
+import DashboardCard from '../../UI/DashboardCard';
 
 const totalAmount = 534523;
 

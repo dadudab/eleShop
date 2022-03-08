@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import classes from './ProductItem.module.css';
 import Button from '../../UI/Button';
 
@@ -15,7 +17,9 @@ const ProductItem = (props) => {
         <span className={classes.title}>Price: </span> {props.price}$
       </p>
       <div className={classes.actions}>
-        <Button>View</Button>
+        <Link to={`/products/${props.id}`}>
+          <Button>View</Button>
+        </Link>
         <Button className={classes.updateBtn}>Update</Button>
         <Button className={classes.deleteBtn}>Delete</Button>
       </div>

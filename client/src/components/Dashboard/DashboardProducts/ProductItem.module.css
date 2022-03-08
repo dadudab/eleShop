@@ -22,8 +22,13 @@
   justify-content: space-around;
 }
 
-.actions button {
+.actions button,
+.actions a {
   width: 30%;
+}
+
+.actions a > button {
+  width: 100%;
 }
 
 .updateBtn {
@@ -45,7 +50,8 @@
 }
 
 @media screen and (min-width: 768px) {
-  .actions button {
+  .actions button,
+  .actions a > button {
     width: auto;
   }
 
@@ -53,7 +59,7 @@
     display: block;
   }
 
-  .actions button:nth-of-type(2) {
+  .actions .updateBtn {
     margin: 0 0.5rem;
   }
 }

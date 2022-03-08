@@ -1,13 +1,11 @@
 import { useState } from 'react';
 
-import OrdersInfo from './OrdersInfo';
-import AmountInfo from './AmountInfo';
+import OrdersInfo from './DashboardCards/OrdersInfo';
+import AmountInfo from './DashboardCards/AmountInfo';
 import classes from './Dashboard.module.css';
-import UsersInfo from './UsersInfo';
-import ProductsInfo from './ProductsInfo';
+import UsersInfo from './DashboardCards/UsersInfo';
+import ProductsInfo from './DashboardCards/ProductsInfo';
 import DashboardProducts from './DashboardProducts/DashboardProducts';
-
-// const DUMMY
 
 const Dashboard = () => {
   const [isProductListOpen, setIsProductListOpen] = useState(false);

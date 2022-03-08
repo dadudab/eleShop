@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 
 import ProductItem from './ProductItem';
+import SearchItems from '../../UI/SearchBar';
 
 const DashboardProducts = () => {
   const [products, setProducts] = useState([]);
+  const [searchString, setSearchString] = useState('');
 
   async function getProducts() {
     try {
@@ -21,20 +23,49 @@ const DashboardProducts = () => {
     }
   }
 
+  const changeSearchStringHandler = (event) => {
+    setSearchString(event.target.value.toLowerCase());
+  };
+
+  const filteredData = products.filter((item) => {
+    if (searchString === '') {
+      return item;
+    } else {
+      return (
+        item.name.toLowerCase().includes(searchString) ||
+        item._id.includes(searchString)
+      );
+    }
+  });
+
+  const filteredDataIsEmpty = filteredData.length === 0;
+
   useEffect(() => {
     getProducts();
   }, []);
 
   return (
-    <div>
+    <Fragment>
+      <SearchItems
+        for="products"
+        id="products"
+        placeholder="id, name"
+        onChange={changeSearchStringHandler}
+      />
+      {filteredDataIsEmpty && <h3 style={{ marginTop: '1rem' }}>No results</h3>}
       <ul>
-        {products.map((item) => {
+        {filteredData.map((item) => {
           return (
-            <ProductItem id={item._id} name={item.name} price={item.price} />
+            <ProductItem
+              key={item._id}
+              id={item._id}
+              name={item.name}
+              price={item.price}
+            />
           );
         })}
       </ul>
-    </div>
+    </Fragment>
   );
 };
 
