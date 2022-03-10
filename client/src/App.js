@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import Cart from './components/Cart/Cart';
 import DashboardPage from './pages/DashboardPage';
 import AuthContext from './store/auth-context';
+import NewProductPage from './pages/NewProductPage';
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -37,6 +38,11 @@ const App = () => {
         <Route path="/about">
           <AboutPage />
         </Route>
+        {isUserAdmin && (
+          <Route path="/products/new">
+            <NewProductPage />
+          </Route>
+        )}
         <Route path="/products/:productId">
           <ProductDetailsPage />
         </Route>

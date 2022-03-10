@@ -44,6 +44,9 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchProduct(productId);
+    return () => {
+      setProduct({});
+    };
   }, []);
 
   const showToggleHandler = () => {

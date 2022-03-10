@@ -1,7 +1,10 @@
 import { useEffect, useState, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
+import classes from './DashboardProducts.module.css';
 import ProductItem from './ProductItem';
 import SearchItems from '../../UI/SearchBar';
+import Button from '../../UI/Button';
 
 const DashboardProducts = () => {
   const [products, setProducts] = useState([]);
@@ -46,6 +49,9 @@ const DashboardProducts = () => {
 
   return (
     <Fragment>
+      <Link to="/products/new">
+        <Button className={classes.newBtn}>New Product</Button>
+      </Link>
       <SearchItems
         for="products"
         id="products"

@@ -1,0 +1,16 @@
+.newBtn {
+  background-color: blue;
+  color: white;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.newBtn:hover {
+  background-color: #000070;
+}
+
+@media screen and (min-width: 768px) {
+  .newBtn {
+    width: auto;
+  }
+}

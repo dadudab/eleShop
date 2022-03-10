@@ -4,7 +4,7 @@ const SearchBar = (props) => {
   return (
     <div className={classes.searchContainer}>
       <label className={classes.searchLabel} htmlFor={props.for}>
-        Search items:
+        Search:
       </label>
       <input
         className={classes.searchInput}
