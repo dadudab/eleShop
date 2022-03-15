@@ -39,7 +39,7 @@ const App = () => {
           <AboutPage />
         </Route>
         {isUserAdmin && (
-          <Route path="/products/new">
+          <Route path="/dashboard/products/new">
             <NewProductPage />
           </Route>
         )}

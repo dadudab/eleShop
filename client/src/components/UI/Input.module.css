@@ -42,5 +42,5 @@ select:-webkit-autofill:focus {
 
 .inputWrapper small {
   color: red;
-  font-size: 12px;
+  /* font-size: 12px; */
 }

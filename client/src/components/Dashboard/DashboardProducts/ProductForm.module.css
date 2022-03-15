@@ -1,0 +1,33 @@
+.actions {
+  margin-top: 0.5rem;
+}
+
+.actions .addBtn {
+  background-color: #0000ff;
+  color: white;
+  margin-left: 0.3rem;
+}
+
+.actions .addBtn:hover {
+  background-color: #000070;
+}
+
+form p {
+  margin-top: 1rem;
+}
+
+.checkboxes li {
+  display: flex;
+  align-items: center;
+}
+
+.checkboxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (min-width: 550px) {
+  .checkboxes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

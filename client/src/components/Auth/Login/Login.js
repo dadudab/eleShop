@@ -50,9 +50,7 @@ const Login = () => {
 
   return (
     <Fragment>
-      {error && (
-        <ErrorMessage className={classes.loginError}>{error}</ErrorMessage>
-      )}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <section className={classes.login}>
         <div className={classes.loginWrapper}>
           <h2 style={{ color: 'blue' }}>Login</h2>

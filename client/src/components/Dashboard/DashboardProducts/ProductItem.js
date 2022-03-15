@@ -4,6 +4,8 @@ import classes from './ProductItem.module.css';
 import Button from '../../UI/Button';
 
 const ProductItem = (props) => {
+  const formatedDate = new Date(props.date);
+
   return (
     <li className={classes.item}>
       <p>
@@ -16,6 +18,7 @@ const ProductItem = (props) => {
       <p>
         <span className={classes.title}>Price: </span> {props.price}$
       </p>
+      {/* add date here */}
       <div className={classes.actions}>
         <Link to={`/products/${props.id}`}>
           <Button>View</Button>

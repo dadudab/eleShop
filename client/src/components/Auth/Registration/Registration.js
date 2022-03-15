@@ -60,9 +60,7 @@ const Registration = () => {
 
   return (
     <React.Fragment>
-      {error && (
-        <ErrorMessage className={classes.registerError}>{error}</ErrorMessage>
-      )}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <section className={classes.registration}>
         <div className={classes.registrationWrapper}>
           <h2 style={{ color: 'blue' }}>Registration</h2>

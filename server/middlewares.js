@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./models/user');
 
 module.exports.validateProduct = (req, res, next) => {
-  const { error } = productSchema.validate(req.body.product);
+  const { error } = productSchema.validate(req.body);
   if (error) {
     console.log(error.message);
     // return res.json(error);

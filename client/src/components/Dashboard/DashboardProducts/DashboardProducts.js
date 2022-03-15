@@ -49,7 +49,7 @@ const DashboardProducts = () => {
 
   return (
     <Fragment>
-      <Link to="/products/new">
+      <Link to="/dashboard/products/new">
         <Button className={classes.newBtn}>New Product</Button>
       </Link>
       <SearchItems
@@ -67,6 +67,7 @@ const DashboardProducts = () => {
               id={item._id}
               name={item.name}
               price={item.price}
+              date={item.date}
             />
           );
         })}
