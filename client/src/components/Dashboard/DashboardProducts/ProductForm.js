@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import useInput from '../../../hooks/use-input';
 
@@ -39,7 +40,12 @@ const ProductForm = (props) => {
     new Array(ALL_CATEGORIES.length).fill(false)
   );
   const [categories, setCategories] = useState([]);
+  const [selectedFile, setSelectedFile] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
 
+  const history = useHistory();
+
+  // use input
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -64,6 +70,27 @@ const ProductForm = (props) => {
     valueInputBlurHandler: descInputBlurHandler,
   } = useInput((value) => value.trim() !== '');
 
+  // file upload
+  const imageChangeHandler = (event) => {
+    const file = event.target.files[0];
+    previewFile(file);
+    setSelectedFile(event.target.value);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    if (file && file.type.match('image.*')) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setPreviewSource(reader.result);
+      };
+    }
+    return;
+  };
+
+  const noUploadFileError = !selectedFile;
+
+  // checkboxes
   const checkboxChangeHandler = (position) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       position === index ? !item : item
@@ -82,7 +109,12 @@ const ProductForm = (props) => {
   };
 
   let formIsValid = false;
-  if (enteredNameIsValid && enteredPriceIsValid && enteredDescIsValid) {
+  if (
+    enteredNameIsValid &&
+    enteredPriceIsValid &&
+    enteredDescIsValid &&
+    selectedFile
+  ) {
     formIsValid = true;
   }
 
@@ -101,6 +133,7 @@ const ProductForm = (props) => {
       price: enteredPrice,
       description: enteredDesc,
       categories: categories,
+      image: previewSource,
     };
 
     props.onAddProduct(product);
@@ -108,6 +141,18 @@ const ProductForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
+      <div className={classes.upload}>
+        <label htmlFor="productImg">Upload image</label>
+        <input
+          id="productImg"
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={imageChangeHandler}
+          value={selectedFile}
+        />
+        {noUploadFileError && <small>You must upload image</small>}
+        {selectedFile && <img src={previewSource} alt={enteredName} />}
+      </div>
       <Input
         name="name"
         id="name"
@@ -157,7 +202,9 @@ const ProductForm = (props) => {
         })}
       </ul>
       <div className={classes.actions}>
-        <Button>Back</Button>
+        <Link to="/dashboard">
+          <Button>Back</Button>
+        </Link>
         <Button type="submit" className={classes.addBtn}>
           Add product
         </Button>

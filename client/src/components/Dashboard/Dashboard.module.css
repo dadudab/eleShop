@@ -3,12 +3,11 @@
   margin: 1rem auto;
 }
 
-.wrapper {
+/* .wrapper {
   padding: 1rem;
 }
 
 .wrapper h2 {
-  /* margin-bottom: 1rem; */
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -29,7 +28,7 @@
   border-top: 3px solid white;
   border-left: 3px solid white;
   transform: rotate(225deg);
-}
+} */
 
 .stats {
   margin-top: 1rem;
@@ -37,11 +36,11 @@
   gap: 20px;
 }
 
-.products {
+/* .products {
   margin: 1rem auto;
   background-color: #1f1f1f;
   border-radius: 5px;
-}
+} */
 
 @media screen and (min-width: 700px) {
   .stats {

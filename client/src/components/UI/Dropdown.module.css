@@ -1,0 +1,31 @@
+.dropdown {
+  background-color: #1f1f1f;
+  margin-top: 1rem;
+}
+
+.wrapper {
+  padding: 1rem;
+}
+
+.wrapper h2 {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.arrowUp {
+  height: 15px;
+  width: 15px;
+  border-top: 3px solid white;
+  border-left: 3px solid white;
+  transform: rotate(45deg);
+  margin-top: 10px;
+}
+
+.arrowDown {
+  height: 15px;
+  width: 15px;
+  border-top: 3px solid white;
+  border-left: 3px solid white;
+  transform: rotate(225deg);
+}

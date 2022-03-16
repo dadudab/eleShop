@@ -1,5 +1,5 @@
-// const { json } = require('express');
 const Product = require('../models/product');
+const { cloudinary } = require('../config/cloudinary');
 
 module.exports.getProducts = async (req, res) => {
   try {
@@ -13,15 +13,29 @@ module.exports.getProducts = async (req, res) => {
 module.exports.createProduct = async (req, res) => {
   try {
     const product = req.body;
-    const newProduct = new Product(product);
+
+    const imageString = product.image;
+    const uploadResponse = await cloudinary.uploader.upload(imageString, {
+      folder: 'eleShop',
+    });
+    const uploadImgUrl = uploadResponse.url;
+
+    const newProduct = new Product({
+      ...product,
+      image: uploadImgUrl,
+    });
 
     await newProduct.save();
+    console.log(newProduct);
+
     return res.json(newProduct);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: 'Something went wrong' });
   }
 };
 
+// ----------------------------------------------------------------------------------
 module.exports.getSingleProduct = async (req, res) => {
   try {
     const productId = req.params.id;

@@ -72,6 +72,7 @@ const CartItem = (props) => {
         name: props.name,
         price: props.price,
         amount: props.amount,
+        imageUrl: props.image,
       };
       cartCtx.addToCart(cartItem);
     }
@@ -87,16 +88,12 @@ const CartItem = (props) => {
 
   return (
     <li className={classes.cartItem}>
-      <img
-        src="https://images.unsplash.com/photo-1613141411244-0e4ac259d217?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-        alt={props.name}
-      />
+      <img src={props.image} alt={props.name} />
       <div className={classes.contentWrapper}>
         <h4>{props.name}</h4>
         <p>{props.price}$</p>
       </div>
       <div className={classes.amountActions}>
-        {/* add something to button to show fetching */}
         <Button onClick={increaseAmountHandler}>+</Button>
         <span>{props.amount}</span>
         <Button onClick={decreaseAmountHandler}>-</Button>

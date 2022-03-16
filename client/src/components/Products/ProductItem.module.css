@@ -6,7 +6,7 @@
 
 .item img {
   width: 100%;
-  height: auto;
+  height: 200px;
   max-height: 250px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -15,12 +15,17 @@
 
 .content {
   padding: 0.5rem;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  height: 75px;
 }
 
 .actions {

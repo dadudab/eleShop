@@ -47,6 +47,7 @@ const Cart = (props) => {
                   name={item.product.name}
                   price={item.product.price}
                   amount={item.quantity}
+                  image={item.product.image}
                 />
               );
             })}
@@ -89,6 +90,7 @@ const Cart = (props) => {
               name={item.name}
               price={item.price}
               amount={item.amount}
+              image={item.image}
             />
           );
         })}

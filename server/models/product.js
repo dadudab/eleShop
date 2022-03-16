@@ -7,11 +7,15 @@ const productShema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, 'Description must not be empt!'],
+    required: [true, 'Description must not be empt'],
   },
   price: {
     type: Number,
     required: [true, 'Price must not be empty'],
+  },
+  image: {
+    type: String,
+    required: [true, 'You must upload file'],
   },
   categories: [
     {

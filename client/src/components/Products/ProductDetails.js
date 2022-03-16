@@ -6,10 +6,7 @@ import ErrorMessage from '../UI/ErrorMessage';
 import Loading from '../UI/Loading';
 import Button from '../UI/Button';
 
-const DUMMY_DESC =
-  'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque eum ut odio nesciunt. Veniam reiciendis ipsum provident. Esse rem asperiores tempora earum quos neque illum reprehenderit, exercitationem a consequatur! Laudantium.Necessitatibus eaque amet similique placeat atque doloremque distinctio qui? In tempore consequuntur quas quibusdam animi, similique officia perferendis voluptatum repudiandae laudantium laboriosam veritatis dolor dolorem tempora quo ducimus facere iste.Suscipit at impedit molestiae quod, distinctio voluptas, necessitatibus nulla laudantium minus nobis exercitationem minima et officiis debitis quam aperiam dolorum corrupti, doloribus tenetur rem maxime repellat. Exercitationem atque voluptate ut.';
-
-// const DUMMY_DESC = 'asdasd asd ddd';
+const DUMMY_DESC = 'asdasdasd';
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -44,10 +41,10 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchProduct(productId);
-    return () => {
-      setProduct({});
-    };
-  }, []);
+    // return () => {
+    //   setProduct({});
+    // };
+  }, [productId]);
 
   const showToggleHandler = () => {
     setIsShowMoreOpen((prevState) => !prevState);
@@ -61,13 +58,17 @@ const ProductDetails = () => {
     return <Loading />;
   }
 
-  let description;
-  if (DUMMY_DESC.length < 100) {
-    description = <p>{DUMMY_DESC}</p>;
-  } else {
-    description = (
+  console.log(product);
+
+  // description
+  const desc = product.description;
+  let asd;
+  if (desc && desc.length < 100) {
+    asd = <p>{product.description}</p>;
+  } else if (desc) {
+    asd = (
       <p>
-        {isShowMoreOpen ? DUMMY_DESC : DUMMY_DESC.substring(0, 100)}
+        {isShowMoreOpen ? desc : desc.substring(0, 100)}
         <span className={classes.showLink} onClick={showToggleHandler}>
           {isShowMoreOpen ? 'Show less...' : 'Show more...'}
         </span>
@@ -77,13 +78,10 @@ const ProductDetails = () => {
 
   return (
     <section className={classes.container}>
-      <img
-        src="https://images.unsplash.com/photo-1613141411244-0e4ac259d217?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-        alt={product.name}
-      />
+      <img src={product.image} alt={product.name} />
       <div className={classes.details}>
         <h2>{product.name}</h2>
-        {description}
+        {asd}
         <h3>{product.price} $</h3>
         <div className={classes.actions}>
           <Link to={`/products`}>
