@@ -1,11 +1,11 @@
 import { Fragment, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import AuthContext from '../../../store/auth-context';
+import AuthContext from '../../../../store/auth-context';
 import classes from './NewProduct.module.css';
 import ProductForm from './ProductForm';
-import ErrorMessage from '../../UI/ErrorMessage';
-import Loading from '../../UI/Loading';
+import ErrorMessage from '../../../UI/ErrorMessage';
+import Loading from '../../../UI/Loading';
 
 const NewProduct = () => {
   const [error, setError] = useState(null);

@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 
+const imageSchema = new mongoose.Schema({
+  imageId: String,
+  imageUrl: String,
+  _id: {
+    _id: false,
+  },
+});
+
 const productShema = new mongoose.Schema({
   name: {
     type: String,
@@ -13,10 +21,7 @@ const productShema = new mongoose.Schema({
     type: Number,
     required: [true, 'Price must not be empty'],
   },
-  image: {
-    type: String,
-    required: [true, 'You must upload file'],
-  },
+  image: imageSchema,
   categories: [
     {
       type: String,

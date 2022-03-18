@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import useInput from '../../../hooks/use-input';
+import useInput from '../../../../hooks/use-input';
 
 import classes from './ProductForm.module.css';
-import Input from '../../UI/Input';
-import Textarea from '../../UI/Textarea';
-import Button from '../../UI/Button';
+import Input from '../../../UI/Input';
+import Textarea from '../../../UI/Textarea';
+import Button from '../../../UI/Button';
+import Select from 'react-select';
 
 const ALL_CATEGORIES = [
   {
@@ -35,15 +36,24 @@ const ALL_CATEGORIES = [
   },
 ];
 
+const CATEGORIES_OPTIONS = [
+  { value: 'monitors', label: 'Monitors' },
+  { value: 'mouses', label: 'Mouses' },
+  { value: 'keyboards', label: 'Keyboards' },
+  { value: 'headphones', label: 'Headphones' },
+  { value: 'pc', label: 'PC' },
+  { value: 'phones', label: 'Phones' },
+];
+
 const ProductForm = (props) => {
-  const [checkedState, setCheckedState] = useState(
-    new Array(ALL_CATEGORIES.length).fill(false)
-  );
-  const [categories, setCategories] = useState([]);
+  // const [checkedState, setCheckedState] = useState(
+  //   new Array(ALL_CATEGORIES.length).fill(false)
+  // );
+  // const [selectedCategories, setSelectedCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
+  const [testCats, setTestCats] = useState([]);
   const [selectedFile, setSelectedFile] = useState('');
   const [previewSource, setPreviewSource] = useState('');
-
-  const history = useHistory();
 
   // use input
   const {
@@ -88,25 +98,25 @@ const ProductForm = (props) => {
     return;
   };
 
-  const noUploadFileError = !selectedFile;
+  // const noUploadFileError = !selectedFile;
 
   // checkboxes
-  const checkboxChangeHandler = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      position === index ? !item : item
-    );
-    setCheckedState(updatedCheckedState);
+  // const checkboxChangeHandler = (position) => {
+  //   const updatedCheckedState = checkedState.map((item, index) =>
+  //     position === index ? !item : item
+  //   );
+  //   setCheckedState(updatedCheckedState);
 
-    const selectedCategories = [];
-    updatedCheckedState.map((item, index) => {
-      if (item === true) {
-        return selectedCategories.push(ALL_CATEGORIES[index].value);
-      }
-      return false;
-    });
-    selectedCategories.push('All');
-    setCategories(selectedCategories);
-  };
+  //   const selectedCategories = [];
+  //   updatedCheckedState.map((item, index) => {
+  //     if (item === true) {
+  //       return selectedCategories.push(ALL_CATEGORIES[index].value);
+  //     }
+  //     return false;
+  //   });
+  //   selectedCategories.push('All');
+  //   setCategories(selectedCategories);
+  // };
 
   let formIsValid = false;
   if (
@@ -117,6 +127,11 @@ const ProductForm = (props) => {
   ) {
     formIsValid = true;
   }
+
+  const cats = ['all'];
+  testCats.map((item) => {
+    cats.push(item.value);
+  });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -132,7 +147,7 @@ const ProductForm = (props) => {
       name: enteredName,
       price: enteredPrice,
       description: enteredDesc,
-      categories: categories,
+      categories: cats,
       image: previewSource,
     };
 
@@ -150,7 +165,7 @@ const ProductForm = (props) => {
           onChange={imageChangeHandler}
           value={selectedFile}
         />
-        {noUploadFileError && <small>You must upload image</small>}
+        {!selectedFile && <small>You must upload image</small>}
         {selectedFile && <img src={previewSource} alt={enteredName} />}
       </div>
       <Input
@@ -187,20 +202,12 @@ const ProductForm = (props) => {
         errorMessage="Description must not be empty"
       />
       <p>Categories</p>
-      <ul className={classes.checkboxes}>
-        {ALL_CATEGORIES.map((category, index) => {
-          return (
-            <li key={category.id}>
-              <label htmlFor={category.value}>{category.value}</label>
-              <input
-                type="checkbox"
-                id={category.value}
-                onChange={() => checkboxChangeHandler(index)}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      <Select
+        isMulti
+        options={CATEGORIES_OPTIONS}
+        onChange={setTestCats}
+        value={testCats}
+      />
       <div className={classes.actions}>
         <Link to="/dashboard">
           <Button>Back</Button>

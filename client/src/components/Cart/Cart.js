@@ -47,7 +47,7 @@ const Cart = (props) => {
                   name={item.product.name}
                   price={item.product.price}
                   amount={item.quantity}
-                  image={item.product.image}
+                  image={item.product.image.imageUrl}
                 />
               );
             })}
@@ -69,7 +69,7 @@ const Cart = (props) => {
           <p>
             Total:{' '}
             {isUserCartEmpty
-              ? '0.00'
+              ? '0'
               : userCartCtx.userCart.totalAmount.toFixed(2)}
             $
           </p>

@@ -5,6 +5,7 @@ header {
   align-items: center;
   justify-content: space-evenly;
   height: 7vh;
+  /* position: sticky; */
 }
 
 .logo {

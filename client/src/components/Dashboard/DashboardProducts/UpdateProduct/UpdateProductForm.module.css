@@ -16,7 +16,7 @@ form p {
   margin-top: 1rem;
 }
 
-.checkboxes li {
+/* .checkboxes li {
   display: flex;
   align-items: center;
 }
@@ -24,7 +24,7 @@ form p {
 .checkboxes {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-}
+} */
 
 .upload {
   margin-top: 1rem;
@@ -50,6 +50,8 @@ form p {
   display: block;
   margin: 1rem auto;
   max-width: 100%;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
 .upload small {
@@ -57,6 +59,10 @@ form p {
   color: red;
   margin-top: 0.5rem;
 }
+
+/* .tescikSelect {
+  color: red;
+} */
 
 @media screen and (min-width: 550px) {
   .checkboxes {

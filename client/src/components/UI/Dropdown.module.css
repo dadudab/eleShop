@@ -1,6 +1,7 @@
 .dropdown {
   background-color: #1f1f1f;
   margin-top: 1rem;
+  border-radius: 5px;
 }
 
 .wrapper {

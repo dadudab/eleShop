@@ -1,4 +1,4 @@
-import NewProduct from '../components/Dashboard/DashboardProducts/NewProduct';
+import NewProduct from '../components/Dashboard/DashboardProducts/NewProduct/NewProduct';
 
 const NewProductPage = () => {
   return <NewProduct />;

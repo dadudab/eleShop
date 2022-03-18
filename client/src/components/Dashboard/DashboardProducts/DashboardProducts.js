@@ -68,6 +68,7 @@ const DashboardProducts = () => {
               name={item.name}
               price={item.price}
               date={item.date}
+              fetchProducts={getProducts}
             />
           );
         })}

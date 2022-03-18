@@ -18,11 +18,14 @@ module.exports.createProduct = async (req, res) => {
     const uploadResponse = await cloudinary.uploader.upload(imageString, {
       folder: 'eleShop',
     });
-    const uploadImgUrl = uploadResponse.url;
+    console.log(uploadResponse);
 
     const newProduct = new Product({
       ...product,
-      image: uploadImgUrl,
+      image: {
+        imageId: uploadResponse.public_id,
+        imageUrl: uploadResponse.url,
+      },
     });
 
     await newProduct.save();
@@ -68,8 +71,21 @@ module.exports.updateProduct = async (req, res) => {
 module.exports.deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
+    const foundedProduct = await Product.findById(productId);
+
+    if (!foundedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // delete image from cloudinary
+    const imageId = foundedProduct.image.imageId;
+    const deleteResponse = await cloudinary.uploader.destroy(imageId);
+    console.log(deleteResponse);
+
     await Product.findByIdAndDelete(productId);
+    return res.json({ message: 'Product deleted' });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: 'Something went wrong' });
   }
 };

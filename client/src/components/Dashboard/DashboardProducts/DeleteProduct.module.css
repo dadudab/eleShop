@@ -1,0 +1,29 @@
+.confirmMsg {
+  margin-top: 0.5rem;
+}
+
+.deleteActions {
+  margin-top: 0.6rem;
+}
+
+.noBtn {
+  background-color: blue;
+  color: white;
+  margin-top: 1rem;
+  width: 5rem;
+}
+
+.noBtn:hover {
+  background-color: #000070;
+}
+
+.yesBtn {
+  background-color: #ff0000;
+  margin-left: 1rem;
+  color: white;
+  width: 5rem;
+}
+
+.yesBtn:hover {
+  background-color: #912222;
+}

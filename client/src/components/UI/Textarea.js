@@ -9,6 +9,7 @@ const Textarea = (props) => {
         id={props.id}
         rows={props.rows || '6'}
         onChange={props.onChange}
+        value={props.value}
       ></textarea>
       {props.isInvalid && <small>{props.errorMessage}</small>}
     </div>

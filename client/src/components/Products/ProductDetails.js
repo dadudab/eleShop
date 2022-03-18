@@ -6,8 +6,6 @@ import ErrorMessage from '../UI/ErrorMessage';
 import Loading from '../UI/Loading';
 import Button from '../UI/Button';
 
-const DUMMY_DESC = 'asdasdasd';
-
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [error, setError] = useState(null);
@@ -41,9 +39,6 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetchProduct(productId);
-    // return () => {
-    //   setProduct({});
-    // };
   }, [productId]);
 
   const showToggleHandler = () => {
@@ -58,15 +53,13 @@ const ProductDetails = () => {
     return <Loading />;
   }
 
-  console.log(product);
-
   // description
   const desc = product.description;
-  let asd;
+  let productDescription;
   if (desc && desc.length < 100) {
-    asd = <p>{product.description}</p>;
+    productDescription = <p>{product.description}</p>;
   } else if (desc) {
-    asd = (
+    productDescription = (
       <p>
         {isShowMoreOpen ? desc : desc.substring(0, 100)}
         <span className={classes.showLink} onClick={showToggleHandler}>
@@ -78,10 +71,10 @@ const ProductDetails = () => {
 
   return (
     <section className={classes.container}>
-      <img src={product.image} alt={product.name} />
+      {product.image && <img src={product.image.imageUrl} alt={product.name} />}
       <div className={classes.details}>
         <h2>{product.name}</h2>
-        {asd}
+        {productDescription}
         <h3>{product.price} $</h3>
         <div className={classes.actions}>
           <Link to={`/products`}>

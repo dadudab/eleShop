@@ -11,6 +11,7 @@ import Cart from './components/Cart/Cart';
 import DashboardPage from './pages/DashboardPage';
 import AuthContext from './store/auth-context';
 import NewProductPage from './pages/NewProductPage';
+import UpdateProductPage from './pages/UpdateProductPage';
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -41,6 +42,11 @@ const App = () => {
         {isUserAdmin && (
           <Route path="/dashboard/products/new">
             <NewProductPage />
+          </Route>
+        )}
+        {isUserAdmin && (
+          <Route path="/dashboard/products/:productId/update">
+            <UpdateProductPage />
           </Route>
         )}
         <Route path="/products/:productId">
