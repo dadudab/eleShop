@@ -124,3 +124,13 @@ module.exports.deleteProduct = async (req, res) => {
     return res.status(500).json({ message: 'Something went wrong' });
   }
 };
+
+module.exports.countProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    return res.json({ totalProducts: products.length });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Something went wrong' });
+  }
+};

@@ -8,7 +8,7 @@ import Button from '../../UI/Button';
 import Loading from '../../UI/Loading';
 import ErrorMessage from '../../UI/ErrorMessage';
 
-const DashboardProducts = () => {
+const DashboardProducts = (props) => {
   const [products, setProducts] = useState([]);
   const [searchString, setSearchString] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +27,7 @@ const DashboardProducts = () => {
       }
       const data = await response.json();
       setProducts(data);
+      props.onGetData(products);
       setIsLoading(false);
     } catch (error) {
       setError(error.message);
@@ -53,6 +54,9 @@ const DashboardProducts = () => {
 
   useEffect(() => {
     getProducts();
+    return () => {
+      setProducts([]);
+    };
   }, []);
 
   if (isLoading) {

@@ -28,7 +28,7 @@ const NewProduct = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Something went wrong');
+        throw new Error('Cannot add product');
       }
 
       const data = await response.json();

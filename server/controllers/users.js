@@ -87,3 +87,13 @@ module.exports.loginUser = async (req, res) => {
     return res.status(500).json({ message: 'Someting went wrong' });
   }
 };
+
+module.exports.countUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    return res.json({ totalUsers: users.length });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Something went wrong' });
+  }
+};

@@ -127,6 +127,9 @@ const UpdateProductForm = (props) => {
 
   useEffect(() => {
     getProduct();
+    return () => {
+      setProduct({});
+    };
   }, [productId]);
 
   useEffect(() => {

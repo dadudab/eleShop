@@ -35,6 +35,9 @@ const ProductList = (props) => {
 
   useEffect(() => {
     fetchProducts();
+    return () => {
+      setProducts([]);
+    };
   }, []);
 
   if (error) {

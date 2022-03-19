@@ -75,18 +75,6 @@ const DeleteProduct = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-      {/* <h2>{props.name}</h2>
-      <p className={classes.confirmMsg}>
-        Are you sure you want delete this product?
-      </p>
-      <div className={classes.deleteActions}>
-        <Button className={classes.noBtn} onClick={props.onClose}>
-          No
-        </Button>
-        <Button className={classes.yesBtn} onClick={deleteProductHandler}>
-          Yes
-        </Button>
-      </div> */}
       {content}
     </Modal>
   );

@@ -5,7 +5,7 @@ const DashboardCard = (props) => {
     <div className={classes.dashboardCard}>
       <div className={classes.wrapper}>
         <h4>
-          {props.label} {props.data}
+          {props.name} {props.data}
         </h4>
       </div>
     </div>

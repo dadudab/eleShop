@@ -9,6 +9,12 @@ import DashboardProducts from './DashboardProducts/DashboardProducts';
 import Dropdown from '../UI/Dropdown';
 
 const Dashboard = () => {
+  const [allProducts, setAllProducts] = useState([]);
+
+  const productsHandler = (products) => {
+    setAllProducts(products);
+  };
+
   return (
     <section className={classes.dashboardSection}>
       <h1>Dashboard</h1>
@@ -16,9 +22,12 @@ const Dashboard = () => {
         <OrdersInfo />
         <AmountInfo />
         <UsersInfo />
-        <ProductsInfo />
+        <ProductsInfo allProducts={allProducts} />
       </article>
-      <Dropdown title="Products" content={<DashboardProducts />} />
+      <Dropdown
+        title="Products"
+        content={<DashboardProducts onGetData={productsHandler} />}
+      />
     </section>
   );
 };
