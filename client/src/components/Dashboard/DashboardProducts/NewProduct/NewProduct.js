@@ -22,7 +22,7 @@ const NewProduct = () => {
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: authCtx.token,
+          Authorization: `Bearer ${authCtx.token}`,
         },
         body: JSON.stringify(product),
       });

@@ -5,13 +5,19 @@ import classes from './DashboardProducts.module.css';
 import ProductItem from './ProductItem';
 import SearchItems from '../../UI/SearchBar';
 import Button from '../../UI/Button';
+import Loading from '../../UI/Loading';
+import ErrorMessage from '../../UI/ErrorMessage';
 
 const DashboardProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchString, setSearchString] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   async function getProducts() {
     try {
+      setError(null);
+      setIsLoading(true);
       const response = await fetch('http://localhost:5000/products', {
         mode: 'cors',
       });
@@ -21,8 +27,10 @@ const DashboardProducts = () => {
       }
       const data = await response.json();
       setProducts(data);
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
+      setIsLoading(false);
     }
   }
 
@@ -46,6 +54,13 @@ const DashboardProducts = () => {
   useEffect(() => {
     getProducts();
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <ErrorMessage className={classes.errorMsg}>{error}</ErrorMessage>;
+  }
 
   return (
     <Fragment>

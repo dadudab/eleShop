@@ -49,7 +49,9 @@ module.exports.isUserAdmin = async (req, res, next) => {
       if (decodedToken.isAdmin) {
         next();
       } else {
-        return res.status(405).json({ message: 'You are not allowed' });
+        return res
+          .status(405)
+          .json({ message: 'You are not allowed to do this' });
       }
     }
   } catch (error) {

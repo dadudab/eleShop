@@ -23,7 +23,7 @@ const DeleteProduct = (props) => {
           mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: authCtx.token,
+            Authorization: `Bearer ${authCtx.token}`,
           },
         }
       );

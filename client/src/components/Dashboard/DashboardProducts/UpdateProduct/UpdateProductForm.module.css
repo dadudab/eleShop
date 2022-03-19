@@ -2,30 +2,19 @@
   margin-top: 0.5rem;
 }
 
-.actions .addBtn {
+.actions .updateBtn {
   background-color: #0000ff;
   color: white;
   margin-left: 0.3rem;
 }
 
-.actions .addBtn:hover {
+.actions .updateBtn:hover {
   background-color: #000070;
 }
 
 form p {
   margin-top: 1rem;
 }
-
-/* .checkboxes li {
-  display: flex;
-  align-items: center;
-}
-
-.checkboxes {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-} */
-
 .upload {
   margin-top: 1rem;
 }
@@ -53,16 +42,6 @@ form p {
   border-radius: 5px;
   object-fit: cover;
 }
-
-.upload small {
-  display: block;
-  color: red;
-  margin-top: 0.5rem;
-}
-
-/* .tescikSelect {
-  color: red;
-} */
 
 @media screen and (min-width: 550px) {
   .checkboxes {

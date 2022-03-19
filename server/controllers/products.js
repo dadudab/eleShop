@@ -57,13 +57,48 @@ module.exports.getSingleProduct = async (req, res) => {
 module.exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
-    const product = req.body.product;
+    const product = req.body;
 
+    if (!product.image.imageUrl) {
+      // get previous product and delete image from cloudinary
+      const previousProduct = await Product.findById(productId);
+      if (!previousProduct) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      await cloudinary.uploader.destroy(previousProduct.image.imageId);
+
+      // add new image to cloudinary and save product
+      const imageString = product.image;
+      const uploadResponse = await cloudinary.uploader.upload(imageString, {
+        folder: 'eleShop',
+      });
+      console.log(uploadResponse);
+      const updatedProduct = {
+        ...product,
+        image: {
+          imageUrl: uploadResponse.url,
+          imageId: uploadResponse.public_id,
+        },
+      };
+      const newProduct = await Product.findByIdAndUpdate(
+        productId,
+        updatedProduct,
+        {
+          new: 'true',
+        }
+      );
+      console.table(newProduct);
+      return res.json(newProduct);
+    }
+
+    // update product without new image
     const updatedProduct = await Product.findByIdAndUpdate(productId, product, {
       new: true,
     });
+    console.log(updatedProduct);
     return res.json(updatedProduct);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: 'Someting went wrong' });
   }
 };

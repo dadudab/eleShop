@@ -6,8 +6,15 @@ import Textarea from '../../../UI/Textarea';
 import classes from './UpdateProductForm.module.css';
 import Button from '../../../UI/Button';
 import Select from 'react-select';
+import Loading from '../../../UI/Loading';
+import ErrorMessage from '../../../UI/ErrorMessage';
+import PRODUCT_CATEGORIES from '../../../../assets/productCategories';
 
-const UpdateProductForm = () => {
+// console.log(PRODUCT_CATEGORIES);
+
+const UpdateProductForm = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [product, setProduct] = useState({
     image: '',
     name: '',
@@ -21,6 +28,8 @@ const UpdateProductForm = () => {
 
   async function getProduct() {
     try {
+      setError(null);
+      setIsLoading(true);
       const response = await fetch(
         `http://localhost:5000/products/${productId}`,
         {
@@ -31,13 +40,14 @@ const UpdateProductForm = () => {
         }
       );
       if (!response.ok) {
-        throw new Error('Some error');
+        throw new Error('Cannot get product');
       }
       const data = await response.json();
-      // console.log(data);
+      setIsLoading(false);
       setProduct(data);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
+      setIsLoading(false);
     }
   }
 
@@ -60,7 +70,6 @@ const UpdateProductForm = () => {
     if (uploadImg && uploadImg.type.match('image.*')) {
       reader.readAsDataURL(uploadImg);
       reader.onloadend = () => {
-        console.log(reader.result);
         setSelectedImage(reader.result);
       };
     }
@@ -68,12 +77,7 @@ const UpdateProductForm = () => {
 
   const isNewImage = !selectedImage.imageUrl;
 
-  // select
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla asd', label: 'Vanilla asd' },
-  ];
+  // checkbox
 
   const customStyles = {
     option: (provided, state) => ({
@@ -103,7 +107,7 @@ const UpdateProductForm = () => {
     }),
   };
 
-  // set inital categories
+  // set initial categories
   const array = [];
   product.categories.map((item) => {
     if (item === 'all') {
@@ -128,18 +132,43 @@ const UpdateProductForm = () => {
   useEffect(() => {
     setSelectedCategories(array);
     setSelectedImage(product.image);
-  }, [product]);
+  }, [product.image]);
+
+  // input validation
+  const nameInputIsValid = product.name.trim() !== '';
+  const priceInputIsValid = product.price > 0;
+  const descInputIsValid = product.description.trim() !== '';
+
+  let formIsValid = false;
+  if (nameInputIsValid && priceInputIsValid && descInputIsValid) {
+    formIsValid = true;
+  }
 
   const submitHandler = (event) => {
     event.preventDefault();
 
+    if (!formIsValid) {
+      console.log('form not valid');
+      return;
+    }
+
     const updatedProduct = {
-      ...product,
+      name: product.name,
+      price: product.price,
+      description: product.description,
       categories: updatedCategories,
       image: selectedImage,
     };
-    console.log(updatedProduct);
+    props.onAddProduct(updatedProduct);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>;
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -150,9 +179,7 @@ const UpdateProductForm = () => {
           type="file"
           accept="image/png, image/jpeg"
           onChange={imageChangeHandler}
-          // value={product.image}
         />
-        {/* {noUploadFileError && <small>You must upload image</small>} */}
         {
           <img
             src={!isNewImage ? selectedImage.imageUrl : selectedImage}
@@ -167,10 +194,8 @@ const UpdateProductForm = () => {
         label="Name"
         onChange={nameChangeHandler}
         value={product.name}
-        //   onBlur={nameInputBlurHandler}
-        //   isInvalid={nameInputHasError}
-        //   errorMessage="Name must not be empty"
       />
+      {!nameInputIsValid && <small>Name must not be empty</small>}
       <Input
         type="number"
         name="price"
@@ -179,44 +204,30 @@ const UpdateProductForm = () => {
         label="Price"
         value={product.price}
         onChange={priceChangeHandler}
-        //   value={enteredPrice}
-        //   onBlur={priceInputBlurHandler}
-        //   isInvalid={priceInputHasError}
-        //   errorMessage="Price must be greater than 0"
       />
+      {!priceInputIsValid && <small>Price must be greater than 0</small>}
       <Textarea
         for="desc"
         label="Product description"
         id="desc"
         value={product.description}
         onChange={descriptionChangeHandler}
-        //   onBlur={descInputBlurHandler}
-        //   isInvalid={descInputHasError}
-        //   errorMessage="Description must not be empty"
       />
+      {!descInputIsValid && <small>Description must not be empty</small>}
       <p style={{ marginBottom: '0.3rem' }}>Categories</p>
       <Select
         isMulti
         onChange={setSelectedCategories}
-        options={options}
+        options={PRODUCT_CATEGORIES}
         value={selectedCategories}
         styles={customStyles}
-        // theme={(theme) => ({
-        //   ...theme,
-        //   borderRadius: '5px',
-        //   colors: {
-        //     ...theme.colors,
-        //     primary25: 'hotpink',
-        //     primary: 'black',
-        //   },
-        // })}
       />
       <div className={classes.actions}>
         <Link to="/dashboard">
           <Button>Back</Button>
         </Link>
-        <Button type="submit" className={classes.addBtn}>
-          Add product
+        <Button type="submit" className={classes.updateBtn}>
+          Update product
         </Button>
       </div>
     </form>

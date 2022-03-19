@@ -8,50 +8,10 @@ import Input from '../../../UI/Input';
 import Textarea from '../../../UI/Textarea';
 import Button from '../../../UI/Button';
 import Select from 'react-select';
-
-const ALL_CATEGORIES = [
-  {
-    id: 1,
-    value: 'Monitors',
-  },
-  {
-    id: 2,
-    value: 'Mouses',
-  },
-  {
-    id: 3,
-    value: 'Keyboards',
-  },
-  {
-    id: 4,
-    value: 'Headphones',
-  },
-  {
-    id: 5,
-    value: 'PC',
-  },
-  {
-    id: 6,
-    value: 'Phones',
-  },
-];
-
-const CATEGORIES_OPTIONS = [
-  { value: 'monitors', label: 'Monitors' },
-  { value: 'mouses', label: 'Mouses' },
-  { value: 'keyboards', label: 'Keyboards' },
-  { value: 'headphones', label: 'Headphones' },
-  { value: 'pc', label: 'PC' },
-  { value: 'phones', label: 'Phones' },
-];
+import PRODUCT_CATEGORIES from '../../../../assets/productCategories';
 
 const ProductForm = (props) => {
-  // const [checkedState, setCheckedState] = useState(
-  //   new Array(ALL_CATEGORIES.length).fill(false)
-  // );
-  // const [selectedCategories, setSelectedCategories] = useState([]);
-  // const [categories, setCategories] = useState([]);
-  const [testCats, setTestCats] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedFile, setSelectedFile] = useState('');
   const [previewSource, setPreviewSource] = useState('');
 
@@ -98,26 +58,41 @@ const ProductForm = (props) => {
     return;
   };
 
-  // const noUploadFileError = !selectedFile;
+  const categories = ['all'];
+  selectedCategories.map((item) => {
+    categories.push(item.value);
+  });
 
   // checkboxes
-  // const checkboxChangeHandler = (position) => {
-  //   const updatedCheckedState = checkedState.map((item, index) =>
-  //     position === index ? !item : item
-  //   );
-  //   setCheckedState(updatedCheckedState);
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      border: '1px solid #ffffff79',
+      color: state.isSelected ? 'red' : 'white',
+      background: state.isFocused ? 'gray' : '#1f1f1f',
+    }),
+    control: () => ({
+      background: '#1f1f1f',
+      border: '1px solid #ffffff79',
+      display: 'flex',
+      borderRadius: '5px',
+      color: 'red',
+    }),
+    singleValue: (provided, state) => {
+      const opacity = state.isDisabled ? 0.5 : 1;
+      const transition = 'opacity 300ms';
 
-  //   const selectedCategories = [];
-  //   updatedCheckedState.map((item, index) => {
-  //     if (item === true) {
-  //       return selectedCategories.push(ALL_CATEGORIES[index].value);
-  //     }
-  //     return false;
-  //   });
-  //   selectedCategories.push('All');
-  //   setCategories(selectedCategories);
-  // };
+      return { ...provided, opacity, transition };
+    },
+    menu: () => ({
+      margin: 0,
+    }),
+    input: () => ({
+      color: 'white',
+    }),
+  };
 
+  // form validation
   let formIsValid = false;
   if (
     enteredNameIsValid &&
@@ -127,11 +102,6 @@ const ProductForm = (props) => {
   ) {
     formIsValid = true;
   }
-
-  const cats = ['all'];
-  testCats.map((item) => {
-    cats.push(item.value);
-  });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -147,7 +117,7 @@ const ProductForm = (props) => {
       name: enteredName,
       price: enteredPrice,
       description: enteredDesc,
-      categories: cats,
+      categories: categories,
       image: previewSource,
     };
 
@@ -201,12 +171,13 @@ const ProductForm = (props) => {
         isInvalid={descInputHasError}
         errorMessage="Description must not be empty"
       />
-      <p>Categories</p>
+      <p style={{ marginBottom: '0.3rem' }}>Categories</p>
       <Select
         isMulti
-        options={CATEGORIES_OPTIONS}
-        onChange={setTestCats}
-        value={testCats}
+        options={PRODUCT_CATEGORIES}
+        onChange={setSelectedCategories}
+        value={selectedCategories}
+        styles={customStyles}
       />
       <div className={classes.actions}>
         <Link to="/dashboard">
