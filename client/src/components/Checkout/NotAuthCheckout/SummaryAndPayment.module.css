@@ -1,0 +1,17 @@
+.container > h3 {
+  margin-top: 0.5rem;
+  color: blue;
+}
+
+.container > h4 {
+  /* text-align: right; */
+  margin-top: 0.2rem;
+  border-top: 1px solid gray;
+  padding-top: 0.3rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  /* max-width: 200px; */
+}

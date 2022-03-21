@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useState } from 'react';
+import { useReducer, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 
 import AuthContext from './auth-context';
@@ -14,6 +14,7 @@ const authReducer = (state, action) => {
     const decodedToken = jwtDecode(action.token);
     localStorage.setItem('token', action.token);
     const tokenExpiration = Date.now() + 3540000;
+    // const tokenExpiration = Date.now() + 10000;
     localStorage.setItem('tokenExpiration', tokenExpiration);
     return {
       token: action.token,
@@ -63,21 +64,23 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     if (authState.isLogged) {
-      if (+localStorage.getItem('tokenExpiration') > Date.now()) {
-        const tokenRemainingTime =
-          +localStorage.getItem('tokenExpiration') - Date.now();
-        setTimeout(() => {
+      const tokenExpiration = +localStorage.getItem('tokenExpiration');
+
+      if (tokenExpiration > Date.now()) {
+        const tokenRemainingTime = tokenExpiration - Date.now();
+        const timer = setTimeout(() => {
           console.log('auto logout');
           dispatchAuth({ type: 'LOGOUT_USER' });
         }, tokenRemainingTime);
-      } else if (+localStorage.getItem('tokenExpiration') < Date.now()) {
+        return () => {
+          clearTimeout(timer);
+        };
+      } else if (tokenExpiration < Date.now()) {
         console.log('initial logout');
         dispatchAuth({ type: 'LOGOUT_USER' });
       }
     }
   }, [authState]);
-
-  console.log(authState);
 
   const authContext = {
     token: authState.token,

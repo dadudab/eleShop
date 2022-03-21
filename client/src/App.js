@@ -12,6 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import AuthContext from './store/auth-context';
 import NewProductPage from './pages/NewProductPage';
 import UpdateProductPage from './pages/UpdateProductPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const App = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -63,6 +64,9 @@ const App = () => {
             <DashboardPage />
           </Route>
         )}
+        <Route path="/checkout">
+          <CheckoutPage />
+        </Route>
         <Route path="*">
           <Redirect to="/products" />
         </Route>
