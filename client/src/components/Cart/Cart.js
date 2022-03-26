@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import classes from './Cart.module.css';
 import Modal from '../UI/Modal';
@@ -63,7 +64,14 @@ const Cart = (props) => {
           <div className={classes.cartActions}>
             <Button onClick={props.onCloseCart}>Close</Button>
             {!isUserCartEmpty && (
-              <Button className={classes.orderBtn}>Order</Button>
+              <Link to="/checkout">
+                <Button
+                  className={classes.orderBtn}
+                  onClick={props.onCloseCart}
+                >
+                  Order
+                </Button>
+              </Link>
             )}
           </div>
           <p>
@@ -99,7 +107,11 @@ const Cart = (props) => {
         <div className={classes.cartActions}>
           <Button onClick={props.onCloseCart}>Close</Button>
           {cartCtx.items.length !== 0 && (
-            <Button className={classes.orderBtn}>Order</Button>
+            <Link to="/checkout">
+              <Button className={classes.orderBtn} onClick={props.onCloseCart}>
+                Order
+              </Button>
+            </Link>
           )}
         </div>
         <p>Total: {cartCtx.totalAmount}$</p>

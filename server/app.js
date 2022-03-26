@@ -54,11 +54,13 @@ db.once('open', () => {
 const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
 const cartRoutes = require('./routes/cart');
+const stripeRoutes = require('./routes/stripe');
 
 // Routes
 app.use('/', productRoutes);
 app.use('/', userRoutes);
 app.use('/', cartRoutes);
+app.use('/', stripeRoutes);
 
 const PORT = process.env.PORT || 3000;
 
